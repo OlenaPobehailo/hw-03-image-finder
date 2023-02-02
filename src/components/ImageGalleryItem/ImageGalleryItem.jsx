@@ -3,11 +3,10 @@ import {
   StyledImageGalleryItem,
 } from './ImageGalleryItem.styled';
 
-export const ImageGalleryItem = ({ urlToImage, title }) => {
+export const ImageGalleryItem = ({ previewURL }) => {
   return (
     <StyledImageGalleryItem>
-      <ImageGalleryItemImage src={urlToImage} alt="" width={360} />
-      <h3>{title}</h3>
+      <ImageGalleryItemImage src={previewURL} alt="" width={360} />
     </StyledImageGalleryItem>
   );
 };

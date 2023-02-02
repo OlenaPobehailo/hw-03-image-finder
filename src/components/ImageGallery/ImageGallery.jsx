@@ -6,11 +6,7 @@ export const ImageGallery = ({ images }) => {
   return (
     <ImageGalleryList>
       {images.map(item => (
-        <ImageGalleryItem
-          key={item.url}
-          urlToImage={item.urlToImage}
-          title={item.title}
-        /> 
+        <ImageGalleryItem key={item.id} previewURL={item.previewURL} />
       ))}
     </ImageGalleryList>
   );
