@@ -70,13 +70,18 @@ export class ImagePage extends Component {
     console.log(modalData);
 
     this.setState({
-      isModalOpen: true,
       modalData: modalData,
     });
   };
 
+  closeModal = () => {
+    this.setState({
+      modalData: null,
+    });
+  };
+
   render() {
-    const { images, error, isLoading } = this.state;
+    const { images, error, isLoading, modalData } = this.state;
     console.log(this.state.modalData);
 
     if (error) {
@@ -90,7 +95,12 @@ export class ImagePage extends Component {
 
         {images.length > 0 && <Button updatePage={this.updatePage} />}
 
-        {this.state.isModalOpen && <Modal modalData={this.state.modalData} />}
+        {modalData && (
+          <Modal
+            modalData={this.state.modalData}
+            closeModal={this.closeModal}
+          />
+        )}
       </>
     );
   }
