@@ -4,12 +4,12 @@ import axios from 'axios';
 const API_KEY = '32179167-903c9e169edcad7e661a9574c';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
-export const getImages = query => {
+export const getImagesApi = (query, page) => {
   return axios
     .get('', {
       params: {
         q: query,
-        page: 1,
+        page: page,
         per_page: 12,
         key: API_KEY,
       },
