@@ -16,8 +16,9 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Searchbar changeQuery={this.changeQuery}/>
+        <Searchbar changeQuery={this.changeQuery} />
         <ImagePage query={this.state.query} />
+        
       </div>
     );
   }

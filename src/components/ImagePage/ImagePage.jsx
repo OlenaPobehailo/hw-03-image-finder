@@ -3,6 +3,7 @@ import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { getImagesApi } from 'services/imagesApi';
 import { Loader } from 'components/Loader/Loader';
 import { Button } from 'components/Button/Button';
+import { Modal } from 'components/Modal/Modal';
 
 export class ImagePage extends Component {
   state = {
@@ -11,6 +12,8 @@ export class ImagePage extends Component {
     query: '',
     error: null,
     isLoading: false,
+    isModalOpen: false,
+    modalData: null,
   };
 
   static getDerivedStateFromProps(newProps, state) {
@@ -30,7 +33,12 @@ export class ImagePage extends Component {
     if (prevState.page !== this.state.page && this.state.page !== 1) {
       this.getSearchedImages();
     }
+
+    if (this.state.images !== prevState.images) {
+      //scroll
+    }
   }
+
   getSearchedImages = async () => {
     this.setState({
       isLoading: true,
@@ -50,23 +58,39 @@ export class ImagePage extends Component {
       });
     }
   };
+
   updatePage = () => {
     this.setState(prev => ({
       page: prev.page + 1,
     }));
   };
 
+  openModal = modalData => {
+    console.log('click');
+    console.log(modalData);
+
+    this.setState({
+      isModalOpen: true,
+      modalData: modalData,
+    });
+  };
+
   render() {
     const { images, error, isLoading } = this.state;
+    console.log(this.state.modalData);
+
     if (error) {
       return <h1>{error}</h1>;
     }
+
     return (
       <>
-        <ImageGallery images={images} />
+        <ImageGallery images={images} openModal={this.openModal} />
         {isLoading && <Loader />}
 
         {images.length > 0 && <Button updatePage={this.updatePage} />}
+
+        {this.state.isModalOpen && <Modal modalData={this.state.modalData} />}
       </>
     );
   }
